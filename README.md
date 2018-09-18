@@ -19,7 +19,7 @@ or download a docker image (to come).
 2. clone the repository
 
 ```
-git clone 
+git clone https://github.com/awintersteiger/apewfm
 ```
 
 #### Initial Setup

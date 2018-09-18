@@ -24,10 +24,8 @@ git clone
 
 #### Initial Setup
 
-In order to have a ready-to-use database, we need to import an existing SQL database file (e.g. exported from the current WFM database). In your Rails root folder, put the SQL file in the `db/imports` folder. The file can have any name. The SQL file will be imported into the database everytime you rebuild your MySQL container but not when you restart it. 
-
-If you don't have a SQL file, ask your WFM admin.
-
+1. Edit the docker-compose files and make neccessary adjustments for your networking infrastructure
+1. Edit the docker files (Dokerfile.) and make neccessary adjustments for your networking infrastructure
 
 #### Start the docker containers
 
@@ -139,7 +137,74 @@ Port: 3307
 
 ## Deployment
 
-We use capistrano to deploy
+We use capistrano to deploy and there are three deployment environments as an example, you find them at
+```
+/config/deploy/production.rb
+/config/deploy/test.rb
+/config/deploy/uat.rb
+```
+UAT stands for User Acceptance Testing, the test environment is used to execute automated testing. If you need more environments or different names, use these a template.
+
+1. change the server and user attributes in line 13 of those files.
+1. make sure these user names have corresponding ssh keys in the shell available so they can log in to these machines
+1. configure rbenv on the target machines
+1. set the environment variable WFM_DATABASE_PASSWORD on the target machine (see database.yml for details)
+
+## Installing
+
+1. to set local environment vars for above environments, change the following files:
+1.1 /config/local_env_production.yml
+1.1 /config/local_env_uat.yml
+1. we use Redis for notifications with action cable, the redis servers run in a separate docker container, 
+you might need to adjust /config/cable.yml
+1. apeWFM uses nginx to serve static files, please adjust
+1.1 /conf/nginx_prod.conf
+1.1 /conf/nginx_uat.conf
+1. Create a new secret base for Rails CSRF tokens and save them into config/secrets.yml
+
+## Initializing with data
+
+### Seeds and Custom Seeds
+You might want to change the global settings for the app, there is currently no UI for this. The easiest way is to edit the custom seed file. you can find it in /db/custom_seed/global_settings.rb
+Please visit the technical documentation to see how they work.
+
+The same goes for other base data, such as
+* function codes
+* holidays and religions (we currently provide only data for Austria, insert your own here)
+* special leave entitlements 
+* travel allowances are only a subset and only for Austria, you should add yours here (Country and refund)
+* apeWFM comes with a set of example work time models, you will need to change/add yours here
+
+For all the data and how to add them correctly, please consult my technical documentation.
+
+### Seeds
+
+/db/seeds.rb is run whenever a container is build or you execeute a rails db:seed or similar command.
+Upon initial start you might want to change your seed data in line 10 to change your company main address. All other date should not be changed unless you understand the data model and the rake tasks that build the data needed for a successful installation.
+
+
+### Import a full DB at container build time
+
+You can import an existing database for any deployment, just put the copy into the `/db/imports` folder. The file can have any name, but must be a mysql executable .sql file. The SQL file will be imported into the database everytime you rebuild your MySQL container but not when you restart it. 
+
+### Initial Admin User
+
+Upon creation the setup creates an admin user, that can login with username "admin" and password "admin".
+This user is having all roles and you can start adding your employees, ideally you either change this user to your first employee/user having admin rights or finally delete this user again.
+
+### Images / Uploads
+
+Employee avatars are stored in /public/avatars along with the employee id numbers. Never change those directly, users can upload their avatars in their profile setting.
+
+There is also an import and upload folder in /public that is used for different uploads such as doctor certificates etc.
+
+### Company logo for the reports
+
+please manually replace the contents of the file /public/reports_logo.png with your logo.
+
+## Reporting bugs
+
+As mentioned before, apeWFM is currently still in development, there are many bugs and we have our bugtracker at the projects home page. you can report bugs there also.
 
 ## Built With
 

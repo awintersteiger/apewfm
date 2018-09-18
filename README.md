@@ -215,11 +215,11 @@ As mentioned before, apeWFM is currently still in development, there are many bu
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
+## Authors & Contributors
 
-* **Andreas Wintersteiger** - *Initial and main work* - [awintersteiger](https://github.com/awintersteiger)
+* **Andreas Wintersteiger** - *Initial author and main work* - [awintersteiger](https://github.com/awintersteiger)
 * Hadi Samadi - major contributions at Objectbay (2017-2018)
 * Christina Grafeneder - contributions at Objectbay (2017-2018)
 * Anna Ronacher - contributions at Objectbay (2017-2018)
@@ -228,7 +228,7 @@ See also the list of [contributors](https://github.com/awintersteiger/apewfm/gra
 
 ## License
 
-This project is licensed under GNU Affero General Public License (AGPL).
+This project is licensed under [GNU Affero General Public License (AGPL)](https://www.gnu.org/licenses/licenses.html#AGPL).
 
 ## Acknowledgments
 

@@ -224,7 +224,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 * Christina Grafeneder - contributions at Objectbay (2017-2018)
 * Anna Ronacher - contributions at Objectbay (2017-2018)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/awintersteiger/apewfm/graphs/contributors) who participated in this project.
 
 ## License
 
